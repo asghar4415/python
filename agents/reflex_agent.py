@@ -4,33 +4,41 @@
 
 # the agent has a simple rule: if the room is dark, turn on the light switch.
 
-import random
+class environment:
+    def __init__(self):
+        self.grid = [
+            'dirty', 'clean', 'dirty',
+            'clean', 'dirty', 'clean',
+            'dirty', 'clean', 'clean'
+        ]
+
+    def scan(self):
+        return self.grid
+
+    def clean(self, i):
+        self.grid[i] = 'clean'
 
 
 class SimpleReflexAgent:
-
-    states = ['dark', 'light']
-
-    def __init__(self):
-        self.room = random.choice(self.states)
+    def __init__(self, environment):
+        self.environment = environment
+        self.grid = self.environment.scan()
 
     def scanroom(self):
-        return self.room
+        return self.grid
 
-    def handle_action(self):
-        if self.room == 'dark':
-            print('The room is dark. Turning on the light switch.')
-            self.room = 'light'  # Update the actual room state
-        else:
-            print('The room is already light.')
+    def act(self):
+        for i in range(9):
+            if self.grid[i] == 'dirty':
+                print('Vacuuming at position', i)
+                self.environment.clean(i)
 
-    def run(self):
-        while True:
-            self.handle_action()
-            input('Press Enter to continue...')
+            else:
+                print('Position', i, 'is already clean.')
 
 
 if __name__ == '__main__':
-
-    agent = SimpleReflexAgent()
-    agent.run()
+    env = environment()
+    agent = SimpleReflexAgent(env)
+    agent.act()
+    print('All positions are clean now.')
