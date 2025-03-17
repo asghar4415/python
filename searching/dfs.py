@@ -14,7 +14,7 @@ def dfs(graph, start, goal):
             print("\nGoal found!")
             break
 
-        for neighbour in graph[node]:
+        for neighbour in reversed(graph[node]):
             if neighbour not in visited:
                 visited.append(neighbour)
                 stack.append(neighbour)
@@ -29,4 +29,3 @@ start = 'A'
 goal = 'I'
 
 dfs(graph, start, goal)
-# Output: A C G F I

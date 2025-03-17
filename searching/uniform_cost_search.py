@@ -1,12 +1,12 @@
 graph = {
-    'A': {'B': 2, 'C': 1}, 'B': {'D': 4, 'E': 3}, 'C': {'F': 1, 'G': 5},
-    'D': {'H': 2}, 'E': {}, 'F': {'I': 6}, 'G': {}, 'H': {}, 'I': {}
+    'A': {'B': 2, 'C': 1}, 'B': {'D': 6, 'G': 3}, 'C': {'D': 5, 'A': 1},
+    'D': {'C': 5, 'B': 6, 'G': 4, 'F': 2, 'I': 1}, 'G': {'D': 4, 'B': 3}, 'F': {'I': 4, 'D': 2}, 'I': {'F': 4, 'D': 1}
 }
 
 
 def ucs(graph, start, goal):
     frontier = [(start, 0)]  # List of (node, cost)
-    visited = set()
+    visited = []
     cost_so_far = {start: 0}
     came_from = {start: None}
 
@@ -18,7 +18,7 @@ def ucs(graph, start, goal):
         if current_node in visited:
             continue
 
-        visited.add(current_node)
+        visited.append(current_node)
 
         if current_node == goal:
             path = []

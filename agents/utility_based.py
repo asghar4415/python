@@ -46,5 +46,5 @@ class SmartThermostat:
 
 if __name__ == '__main__':
 
-    agent = SmartThermostat(22)
+    agent = SmartThermostat(26)
     agent.decide_action()

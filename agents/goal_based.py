@@ -2,8 +2,6 @@
 
 # A delivery robot operates in a 5x5 warehouse grid. It must deliver a package from its starting location to a specific goal location (delivery point). The robot can move up, down, left, right and must avoid obstacles (blocked cells). The robot has a goal: reach the delivery point as efficiently as possible.
 
-from collections import deque
-
 
 class Warehouse:
     def __init__(self):
@@ -27,21 +25,23 @@ class GoalBasedAgent:
         self.path = []
 
     def bfs_path_to_goal(self):
-        queue = deque()
+        visited = []
+        queue = []
+
         queue.append((self.position, [self.position]))
-        visited = set()
 
         while queue:
-            current_pos, path = queue.popleft()
+            current_pos, path = queue.pop(0)
+
+            if current_pos in visited:
+                continue
+            visited.append(current_pos)
+
             if current_pos == self.goal:
                 self.path = path
                 return
 
-            if current_pos in visited:
-                continue
-            visited.add(current_pos)
-
-            # Possible moves
+        # Possible moves
             for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 next_pos = (current_pos[0] + dx, current_pos[1] + dy)
                 if self.env.is_valid(next_pos) and next_pos not in visited:
