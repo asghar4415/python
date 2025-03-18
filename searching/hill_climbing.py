@@ -1,3 +1,5 @@
+# Hill Climbing is a heuristic search algorithm that continuously moves in the direction of increasing value (or decreasing cost) to find the optimal solution.
+
 import random
 
 # Heuristic function: Counts the number of pairs of attacking queens
